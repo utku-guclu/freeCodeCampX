@@ -9,3 +9,25 @@
   display: flex;
   background: #8ebfd6;
 }
+
+/* generialized css */
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.window {
+  margin: 25px;
+  
+  width: 45vw;
+  min-height: 45vh;
+  background-color: blue;  
+}
+
+/* specialized css */
+
+/* interactive css */
+
