@@ -21,13 +21,61 @@
 
 .window {
   margin: 25px;
-  
+
   width: 45vw;
   min-height: 45vh;
-  background-color: blue;  
+  background-color: lightcyan;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.border {
+  border: 1px solid green;
+}
+
+.shadow {
+  box-shadow: 1px 1px 20px 2px green;
+}
+
+.toolbar {
+  position: relative;
+  padding: 5px;
+  background-color: lightgreen;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.document {
+  border-top: none;
+  flex-grow: 1;
+  background-color: inherit;
+  padding: 15px;
+}
+
+.max-control {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.max-control:hover {
+  opacity: 1;
+}
+
+.maxed {
+  width: 90vw;
+  min-height: 90vh;  
+}
+
+.hidden {
+  display: none;
 }
 
 /* specialized css */
 
 /* interactive css */
-
