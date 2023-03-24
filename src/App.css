@@ -144,6 +144,7 @@ pre code {
   border: 2px solid rgb(3, 39, 3);
   padding-left: 5px;
   padding-right: 5px;
+  text-align: left;
 }
 
 .previewer h1 {
