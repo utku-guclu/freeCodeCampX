@@ -1,71 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+
+import Markdown from "./components/Markdown";
 
 import "./App.css";
 
+const defaultText = `
+# Welcome to my React Markdown Previewer!
+
+## This is a sub-heading...
+### And here's some other cool stuff:
+
+Heres some code, \`<div></div>\`, between 2 backticks.
+
+\`\`\`
+// this is multi-line code:
+
+function anotherExample(firstLine, lastLine) {
+  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
+    return multiLineCode;
+  }
+}
+\`\`\`
+
+You can also make text **bold**... whoa!
+Or _italic_.
+Or... wait for it... **_both!_**
+And feel free to go crazy ~~crossing stuff out~~.
+
+There's also [links](https://www.freecodecamp.com), and
+> Block Quotes!
+
+And if you want to get really crazy, even tables:
+
+Wild Header | Crazy Header | Another Header?
+------------ | ------------- | -------------
+Your content can | be here, and it | can be here....
+And here. | Okay. | I think we get it.
+
+- And of course there are lists.
+  - Some are bulleted.
+     - With different indentation levels.
+        - That look like this.
+
+
+1. And there are numbererd lists too.
+1. Use just 1s if you want!
+1. And last but not least, let's not forget embedded images:
+
+![React Logo w/ Text](https://icons.iconarchive.com/icons/tatice/operating-systems/128/Linux-icon.png)
+`;
+
 function App() {
-  const [quotes, setQuotes] = useState("");
-  const bgRef = useRef();
-  const textRef = useRef();
-
-  const getQuote = () => {
-    fetch("https://type.fit/api/quotes")
-      .then((res) => res.json())
-      .then((data) => {
-        let randomNum = Math.floor(Math.random() * data.length);
-        setQuotes(data[randomNum]);
-      });
-  };
-
-  // get quote
-  useEffect(() => {
-    getQuote();
-  }, []);
-
-  // change backroundColor random
-  useEffect(() => {
-    const colorGenerator = (rgb) => {
-      if (rgb.length === 3) return rgb;
-      const randomNumber = Math.floor(Math.random() * 256);
-      rgb = [...rgb, randomNumber];
-      return colorGenerator(rgb);
-    };
-    const [red, green, blue] = colorGenerator([]);
-    bgRef.current.style.backgroundColor = `rgb(${red},${green},${blue})`;
-  }, [quotes]);
-
-  // change backroundColor random
-  useEffect(() => {
-    const colorGenerator = (rgb) => {
-      if (rgb.length === 3) return rgb;
-      const randomNumber = Math.floor(Math.random() * 256);
-      rgb = [...rgb, randomNumber];
-      return colorGenerator(rgb);
-    };
-    const [red, green, blue] = colorGenerator([]);
-    textRef.current.style.color = `rgb(${red},${255},${blue})`;
-  }, [quotes]);
-
   return (
-    <div ref={bgRef} className="App">
-      <div className="quote">
-        <p ref={textRef}>
-          "{quotes.text}"
-        </p>
-        <p><i>{quotes.author}</i></p>
-        <div className="btn-container">
-          <button className="btn" onClick={getQuote}>
-            Get quote
-          </button>
-          <a
-            href={`https://twitter.com/intent/tweet?text?=${quotes.text}`}
-            className="btn"
-            target="_blank"
-            rel="nooponer noreferrer"
-          >
-            Tweet
-          </a>
-        </div>
-      </div>
+    <div id="app">
+      <Markdown defaultText={defaultText} />
     </div>
   );
 }
