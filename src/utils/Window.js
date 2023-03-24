@@ -1,8 +1,7 @@
-export default function Window({ maxed, hidden, children }) {
-  console.log(maxed);
+export default function Window({ maxed, hidden, children, windowClass }) {
   return (
     <div
-      className={`window border shadow${
+      className={`${windowClass} window border shadow${
         maxed ? " maxed" : hidden ? " hidden" : ""
       }`}
     >

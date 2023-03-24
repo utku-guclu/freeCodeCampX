@@ -20,7 +20,7 @@
 }
 
 .window {
-  margin: 25px;
+  margin: 25px auto;
 
   width: 45vw;
   min-height: 45vh;
@@ -47,8 +47,18 @@
   justify-content: space-between;
 }
 
+.inner-toolbar {
+  display: flex;
+  align-items: center;
+}
+
 .title {
   font-weight: bold;
+}
+
+.title:before {
+  content: ' ';
+  white-space: pre;
 }
 
 .document {
@@ -56,6 +66,9 @@
   flex-grow: 1;
   background-color: inherit;
   padding: 15px;
+  outline: none;
+
+  resize: vertical;
 }
 
 .max-control {
@@ -63,19 +76,25 @@
   opacity: 0.6;
 }
 
+/* specialized css */
+.editor {
+  width: 60vw;
+}
+
+.previewer {
+  width: 80vw;
+}
+
+/* interactive css */
 .max-control:hover {
   opacity: 1;
 }
 
 .maxed {
   width: 90vw;
-  min-height: 90vh;  
+  min-height: 90vh;
 }
 
 .hidden {
   display: none;
 }
-
-/* specialized css */
-
-/* interactive css */

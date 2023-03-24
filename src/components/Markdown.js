@@ -3,9 +3,10 @@ import { useState } from "react";
 import Editor from "./Editor";
 import Previewer from "./Previewer";
 
-function Markdown() {
-  const [editorMaxed, setEditorMaxed] = useState(true);
+function Markdown({ defaultText }) {
+  const [editorMaxed, setEditorMaxed] = useState(false);
   const [previewerMaxed, setPreviewerMaxed] = useState(false);
+  const [text, setText] = useState(defaultText);
 
   function handleEditorMaxedToggle() {
     setEditorMaxed(!editorMaxed);
@@ -15,10 +16,25 @@ function Markdown() {
     setPreviewerMaxed(!previewerMaxed);
   }
 
+  function handleTextChange(event) {
+    setText(event.target.value);
+  }
+
   return (
     <div>
-      <Editor maxed={editorMaxed} hidden={previewerMaxed} onMaxedToggle={handleEditorMaxedToggle}/>
-      <Previewer maxed={previewerMaxed} hidden={editorMaxed} onMaxedToggle={handlePreviewerMaxedToggle}/>
+      <Editor
+        text={text}
+        maxed={editorMaxed}
+        hidden={previewerMaxed}
+        onMaxedToggle={handleEditorMaxedToggle}
+        onTextChange={handleTextChange}
+      />
+      <Previewer
+        text={text}
+        maxed={previewerMaxed}
+        hidden={editorMaxed}
+        onMaxedToggle={handlePreviewerMaxedToggle}
+      />
     </div>
   );
 }
