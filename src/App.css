@@ -1,0 +1,95 @@
+:root {
+  --drum-width-mobile: 250px;
+  --drum-width-desktop: 700px;
+  --drum-height-mobile: calc(250px * 2);
+  --drum-height-desktop: calc(700px / 2);
+  --shadow-depth: 3px;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  min-height: 100vh;
+  background-color: silver;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.drum-machine {
+  min-width: var(--drum-width-mobile);
+  height: var(--drum-height-mobile);
+  background-color: coral;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 700px) {
+  .drum-machine {
+    width: var(--drum-width-desktop);
+    height: var(--drum-height-desktop);
+  }
+}
+.drum-machine > .title {
+  background-color: lightblue;
+}
+.drum-machine > .drum {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: pink;
+}
+@media (min-width: 700px) {
+  .drum-machine > .drum {
+    flex-direction: row;
+  }
+}
+.drum-machine > .drum > .pad-area {
+  flex: 50%;
+  background-color: khaki;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.drum-machine > .drum > .pad-area > .grid {
+  width: 80%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.drum-machine > .drum > .pad-area > .grid > .button {
+  background-color: gray;
+  border-radius: 5px;
+  box-shadow: var(--shadow-depth) var(--shadow-depth) calc(var(--shadow-depth) * 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.drum-machine > .drum > .pad-area > .grid > .button.hit {
+  transform: translate(var(--shadow-depth), var(--shadow-depth));
+  box-shadow: none;
+  background-color: rgb(67, 255, 76);
+}
+.drum-machine > .drum > .controls {
+  flex: 50%;
+  background-color: lightcyan;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=App.css.map */
