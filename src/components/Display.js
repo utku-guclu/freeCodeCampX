@@ -1,5 +1,9 @@
-function Display({message}) {
-  return <div className="display">{message}</div>;
+function Display({ message }) {
+  return (
+    <div id="display" className="display">
+      {message}
+    </div>
+  );
 }
-    
+
 export default Display;
