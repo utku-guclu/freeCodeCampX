@@ -29,7 +29,16 @@ function Button({ power, keyTrigger, audioUrl, soundLevel }) {
   };
 
   return (
-    <div className={`button${hit ? " hit" : ""}`} onClick={playSound}>
+    <div
+      className={`button${
+        hit && power === "R"
+          ? " power-on hit"
+          : power === "L" && hit
+          ? " hit"
+          : ""
+      }`}
+      onClick={playSound}
+    >
       {keyTrigger}
       <audio src={audioUrl} ref={audioRef}></audio>
     </div>

@@ -84,7 +84,9 @@ body {
 .drum-machine > .drum > .pad-area > .grid > .button.hit {
   transform: translate(var(--shadow-depth), var(--shadow-depth));
   box-shadow: none;
-  background-color: rgb(67, 255, 76);
+}
+.drum-machine > .drum > .pad-area > .grid > .button.hit.power-on {
+  background-color: lightgreen;
 }
 .drum-machine > .drum > .controls {
   flex: 50%;

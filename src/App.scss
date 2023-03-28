@@ -93,7 +93,10 @@ body {
           &.hit {
             transform: translate(var(--shadow-depth), var(--shadow-depth));
             box-shadow: none;
-            background-color: rgb(67, 255, 76);
+
+            &.power-on {
+              background-color: lightgreen;
+            }
           }
         }
       }
@@ -139,19 +142,19 @@ body {
     width: 70px;
     height: 30px;
     background-color: black;
-  
+
     padding: 2px;
     cursor: pointer;
     display: flex;
-  
+
     &.R {
       justify-content: flex-end;
     }
-  
+
     &.L {
       justify-content: flex-start;
     }
-  
+
     > .toggle {
       width: 35px;
       height: 26px;
@@ -159,5 +162,3 @@ body {
     }
   }
 }
-
-
