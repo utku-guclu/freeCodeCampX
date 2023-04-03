@@ -1,0 +1,86 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  display: grid;
+  grid-template-areas: "exp exp exp exp" "io  io  io  io" "ac  ac   .   ." ".   .   .   ." ".   .   .   ." ".   .   .   eq" "n0  n0  .   eq";
+  grid-gap: 1px;
+  padding: 5px;
+  background-color: rgb(22, 21, 21);
+}
+.calculator > div {
+  --font-size: 2em;
+  min-height: var(--font-size);
+  min-width: var(--font-size);
+  color: white;
+  font-size: var(--font-size);
+}
+.calculator > div.exp {
+  min-height: 0;
+  grid-area: exp;
+  font-size: calc(var(--font-size) * 0.5);
+  font-family: "Orbitron", sans-serif;
+  color: orange;
+  display: flex;
+  justify-content: flex-end;
+}
+.calculator > div.io {
+  min-height: 1em;
+  grid-area: io;
+  font-size: calc(var(--font-size) * 0.9);
+  font-family: "Orbitron", sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.calculator > div.ac {
+  grid-area: ac;
+  background-color: rgb(255, 62, 56);
+}
+.calculator > div.eq {
+  grid-area: eq;
+  background-color: rgb(24, 105, 99);
+}
+.calculator > div.n0 {
+  grid-area: n0;
+}
+.calculator > div[class^=n], .calculator > div.n0, .calculator > div.dec {
+  background-color: rgb(104, 93, 93);
+}
+.calculator > div.m, .calculator > div.d, .calculator > div.a, .calculator > div.s {
+  background-color: rgb(150, 128, 128);
+}
+.calculator > div > button {
+  min-height: 100%;
+  min-width: 100%;
+  color: white;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  font-size: calc(var(--font-size) * 0.5);
+}
+.calculator > div > button:hover {
+  border: 1px solid red;
+  color: black;
+}
+
+/*# sourceMappingURL=App.css.map */
