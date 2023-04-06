@@ -30,8 +30,19 @@ body {
   > .length-setters {
     display: flex;
 
-    .length-setter {
+    > .length-setter {
       margin: 0.5em;
+    }
+  }
+
+  > .display {
+    width: max-content;
+
+    margin: 0 auto;
+
+    > .time-left {
+      font-size: 2em;
+      background-color: red;
     }
   }
 

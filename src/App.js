@@ -4,10 +4,15 @@ import Clock from "./components/Clock";
 
 import "./App.css";
 
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 function App() {
   return (
     <div id="app">
-      <Clock />
+      <Provider store={store}>
+        <Clock />
+      </Provider>
     </div>
   );
 }

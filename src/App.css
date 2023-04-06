@@ -29,8 +29,16 @@ body {
 .clock > .length-setters {
   display: flex;
 }
-.clock > .length-setters .length-setter {
+.clock > .length-setters > .length-setter {
   margin: 0.5em;
+}
+.clock > .display {
+  width: max-content;
+  margin: 0 auto;
+}
+.clock > .display > .time-left {
+  font-size: 2em;
+  background-color: red;
 }
 .clock button {
   border: none;
