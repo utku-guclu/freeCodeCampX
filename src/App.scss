@@ -40,9 +40,12 @@ body {
 
     margin: 0 auto;
 
+    border: 6px solid rgba(21, 22, 26, 0.555);
+    padding: 0.5em;
+    border-radius: 1em;
+
     > .time-left {
       font-size: 2em;
-      background-color: red;
     }
   }
 
@@ -52,5 +55,9 @@ body {
     cursor: pointer;
     background-color: inherit;
     color: inherit;
+
+    &:hover {
+      color: rgb(17, 16, 16);
+    }
   }
 }
