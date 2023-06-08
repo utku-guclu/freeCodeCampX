@@ -14,5 +14,19 @@ body {
 }
 
 svg {
-  background-color: wheat;
+  background-color: #212964a6;
+}
+
+#green {
+  color: green;
+}
+
+#orange {
+  color: orangered;
+}
+
+#tooltip {
+  visibility: hidden;
+  width: auto;
+  height: auto;
 }

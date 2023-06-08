@@ -1,5 +1,5 @@
 const url =
-  "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json";
+  "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json";
 
 const WIDTH = 800;
 const HEIGHT = 600;
@@ -7,9 +7,8 @@ const HEIGHT = 600;
 const PAD = (984 - WIDTH) / 2;
 
 const svg = d3.select("svg");
+let tooltip = d3.select("#tooltip");
 
-let xAxisScale;
-let yAxisScale;
 let xScale;
 let yScale;
 
@@ -19,32 +18,25 @@ const drawCanvas = () => {
 };
 
 const generateScales = (values) => {
-  yScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(values, (item) => item[1])])
-    .range([0, HEIGHT - 2 * PAD]);
   xScale = d3
     .scaleLinear()
-    .domain([0, values.length - 1])
+    .domain([
+      d3.min(values, (item) => item["Year"] - 1),
+      d3.max(values, (item) => item["Year"] + 1),
+    ])
     .range([PAD, WIDTH - PAD]);
-
-  const datesArr = values.map((item) => {
-    return new Date(item[0]);
-  });
-
-  xAxisScale = d3
+  yScale = d3
     .scaleTime()
-    .domain([d3.min(datesArr), d3.max(datesArr)])
-    .range([PAD, WIDTH - PAD]);
-  yAxisScale = d3
-    .scaleTime()
-    .domain([0, d3.max(values, (item) => item[1])])
-    .range([HEIGHT - PAD, PAD]);
+    .domain([
+      d3.min(values, (item) => new Date(item["Seconds"] * 1000)),
+      d3.max(values, (item) => new Date(item["Seconds"] * 1000)),
+    ])
+    .range([PAD, HEIGHT - PAD]);
 };
 
 const generateAxes = () => {
-  const xAxis = d3.axisBottom(xAxisScale);
-  const yAxis = d3.axisLeft(yAxisScale);
+  const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
+  const yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat("%M:%S"));
 
   svg
     .append("g")
@@ -59,46 +51,44 @@ const generateAxes = () => {
     .attr("transform", "translate(" + PAD + ", 0)");
 };
 
-const drawBars = (values) => {
-  const tooltip = d3
-    .select("body")
-    .append("div")
-    .attr("id", "tooltip")
-    .style("visibility", "hidden")
-
+const drawPoints = (values) => {
   svg
-    .selectAll("rect")
+    .selectAll("circle")
     .data(values)
     .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("data-date", (item) => item[0])
-    .attr("data-gdp", (item) => item[1])
-    .attr("width", (WIDTH - 2 * PAD) / values.length)
-    .attr("height", (item) => yScale(item[1]))
-    .attr("y", (item) => HEIGHT - PAD - yScale(item[1]))
-    .attr("x", (item, index) => xScale(index))
+    .append("circle")
+    .attr("class", "dot")
+    .attr("r", "5")
+    .attr("data-xvalue", (d) => d["Year"])
+    .attr("data-yvalue", (d) => new Date(d["Seconds"] * 1000))
+    .attr("cx", (d) => xScale(d["Year"]))
+    .attr("cy", (d) => yScale(new Date(d["Seconds"] * 1000)))
+    .attr("fill", (d) => (d["Doping"] !== "" ? "orange" : "lightgreen"))
     .on("mouseover", (e, item) => {
       tooltip.transition().style("visibility", "visible");
-      tooltip.text(item[0]);
+
+      item["Doping"] !== ""
+        ? tooltip.text(
+            item["Year"] + " - " + item["Time"] + " - " + item["Doping"]
+          )
+        : tooltip.text(
+            item["Year"] + " - " + item["Time"] + " - " + "No Allegations"
+          );
+      tooltip.attr('data-year', item['Year'])
     })
     .on("mouseout", (e, item) => {
       tooltip.transition().style("visibility", "hidden");
-      tooltip.text(item[0]);
-      
-      document.querySelector('#tooltip').setAttribute('data-date', item[0])
     });
 };
 
 // request data
 async function getData() {
   const res = await fetch(url);
-  const jsonData = await res.json();
-  const { data: values } = jsonData;
+  const data = await res.json();
   drawCanvas();
-  generateScales(values);
+  generateScales(data);
   generateAxes();
-  drawBars(values);
+  drawPoints(data);
 }
 
 getData();

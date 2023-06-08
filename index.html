@@ -5,15 +5,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bar Chart</title>
+  <title>Scatterplot Graph</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <svg id=""canvas>
-    <text id="title" x="350" y="30">USA GDP</text>
+    <text id="title" x="292" y="30">Doping in Professional Bicycle Racing</text>
   </svg>
+  <div id="tooltip"></div>
+  <div id="legend">
+    Year (x) vs Time (y) <br/>
+    <span id="orange">Orange</span> = Doping Allegation | 
+    <span id="green">Green</span> = No Doping Allegation
+  </div>
   <script defer src="/script.js"></script>
   <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </body>
