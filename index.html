@@ -5,15 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choropleth Map</title>
+  <title>Treemap Diagram</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h1 id="title">United States Educational Attainment</h1>
-  <h4 id="description">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</h4>
+  <h1 id="title">Movie Sales</h1>
+  <h4 id="description">Top 100 Most Sold Movie Grouped by Platform</h4>
   <div id="tooltip">
 
   </div>
@@ -24,19 +23,31 @@
   <svg id="legend">
     <g>
       <rect x="10" y="0" width="40" height="40" fill="tomato"></rect>
-      <text x="60" y="20" fill="black">Less than 15%</text>
+      <text x="60" y="20" fill="black">Action</text>
     </g>
     <g>
       <rect x="10" y="40" width="40" height="40" fill="orange"></rect>
-      <text x="60" y="60" fill="black">15% to %30</text>
+      <text x="60" y="60" fill="black">Drama</text>
     </g>
     <g>
       <rect x="10" y="80" width="40" height="40" fill="lightgreen"></rect>
-      <text x="60" y="100" fill="black">30% to %45</text>
+      <text x="60" y="100" fill="black">Adventure</text>
     </g>
     <g>
-      <rect x="10" y="120" width="40" height="40" fill="limegreen"></rect>
-      <text x="60" y="140" fill="black">More than 45%</text>
+      <rect x="10" y="120" width="40" height="40" fill="coral"></rect>
+      <text x="60" y="140" fill="black">Family</text>
+    </g>
+    <g>
+      <rect x="10" y="160" width="40" height="40" fill="lightblue"></rect>
+      <text x="60" y="180" fill="black">Animation</text>
+    </g>
+    <g>
+      <rect x="10" y="180" width="40" height="40" fill="pink"></rect>
+      <text x="60" y="200" fill="black">Comedy</text>
+    </g>
+    <g>
+      <rect x="10" y="220" width="40" height="40" fill="tan"></rect>
+      <text x="60" y="240" fill="black">Documentary</text>
     </g>
   </svg>
   <script defer src="/script.js"></script>
