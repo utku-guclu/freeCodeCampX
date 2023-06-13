@@ -1,126 +1,81 @@
-const url =
-  "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json";
+const edURL =
+  "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json";
+const countyURL =
+  "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json";
 
-const WIDTH = 1200;
-const HEIGHT = 600;
-
-const PAD = (1292 - WIDTH) / 2;
+let countyData;
+let edData;
 
 const canvas = d3.select("#canvas");
+const tooltip = d3.select("#tooltip");
 
-let xScale;
-let yScale;
-
-let minYear;
-let maxYear;
-
-let baseTemp = "";
-let values = "";
-
-const drawCanvas = () => {
-  canvas.attr("width", WIDTH);
-  canvas.attr("height", HEIGHT);
-};
-
-const generateScales = () => {
-  minYear = d3.min(values, (item) => item["year"]);
-  maxYear = d3.max(values, (item) => item["year"]);
-
-  xScale = d3
-    .scaleLinear()
-    .domain([minYear, maxYear + 1])
-    .range([PAD, WIDTH - PAD]);
-  yScale = d3
-    .scaleTime()
-    .domain([new Date(0, 0, 0, 0, 0, 0, 0), new Date(0, 11, 0, 0, 0, 0, 0)])
-    .range([PAD, HEIGHT - PAD]);
-};
-
-const drawCells = () => {
-  const tooltip = d3.select("#tooltip");
+const drawMap = () => {
   canvas
-    .selectAll("rect")
-    .data(values)
+    .selectAll("path")
+    .data(countyData)
     .enter()
-    .append("rect")
-    .attr("class", "cell")
-    .attr("fill", (item) => {
-      const variance = item["variance"];
-      if (variance <= -2) return "SteelBlue";
-      else if (variance <= 0) return "LightSteelBlue";
-      else if (variance <= 1) return "Orange";
-      else return "Crimson";
+    .append("path")
+    .attr("d", d3.geoPath())
+    .attr("class", "county")
+    .attr("fill", (countyDataItem) => {
+      const id = countyDataItem["id"];
+      const county = edData.find((item) => item["fips"] === id);
+      const percentage = county["bachelorsOrHigher"];
+      if (percentage <= 15) {
+        return "tomato";
+      } else if (percentage <= 30) {
+        return "orange";
+      } else if (percentage <= 45) {
+        return "lightgreen";
+      } else {
+        return "green";
+      }
     })
-    .attr("data-year", (item) => item["year"])
-    .attr("data-month", (item) => item["month"] - 1)
-    .attr("data-temp", (item) => baseTemp + item["variance"])
-    .attr("height", (HEIGHT - PAD) / 12)
-    .attr("y", (item) => yScale(new Date(0, item["month"] - 1, 0, 0, 0, 0, 0)))
-    .attr("width", (item) => {
-      const numOfYears = maxYear - minYear;
-      return (WIDTH - PAD) / numOfYears;
+    .attr("data-flips", (countyDataItem) => countyDataItem["id"])
+    .attr("data-education", (countyDataItem) => {
+      const id = countyDataItem["id"];
+      const county = edData.find((item) => item["fips"] === id);
+
+      const percentage = county["bachelorsOrHigher"];
+      return percentage;
     })
-    .attr("x", (item) => xScale(item["year"]))
-    .on("mouseover", (e, item) => {
+    .on("mouseover", (e, countyDataItem) => {
       tooltip.transition().style("visibility", "visible");
-      const monthNames = [
-        "Jan",
-        "Feb",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
+
+      const id = countyDataItem["id"];
+      const county = edData.find((item) => item["fips"] === id);
+
       tooltip.text(
-        item["year"] +
-          " " +
-          monthNames[item["month"] - 1] +
+        county["fips"] +
           " - " +
-          (baseTemp + item["variance"]) +
-          "(" +
-          item["variance"] +
-          ")"
+          county["area_name"] +
+          ", " +
+          county["state"] +
+          " : " +
+          county["bachelorsOrHigher"] +
+          "%"
       );
+      tooltip.attr("data-education", county["bachelorsOrHigher"]);
     })
-    .on("mouseout", (item) =>
+    .on("mouseout", (countyDataItem) =>
       tooltip.transition().style("visibility", "hidden")
     );
 };
 
-const drawAxes = () => {
-  const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
-  const yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat("%B"));
-
-  canvas
-    .append("g")
-    .call(xAxis)
-    .attr("id", "x-axis")
-    .attr("transform", "translate(0, " + (HEIGHT - PAD) + ")");
-
-  canvas
-    .append("g")
-    .call(yAxis)
-    .attr("id", "y-axis")
-    .attr("transform", "translate(" + PAD + ", " + 0 + ")");
-};
-
 // request data
 async function getData() {
-  const res = await fetch(url);
-  const data = await res.json();
-  baseTemp = data["baseTemperature"];
-  values = data["monthlyVariance"];
-  console.log(baseTemp, values);
-  generateScales();
-  drawCells();
-  drawAxes();
+  try {
+    const resCounty = await fetch(countyURL);
+    const countyDt = await resCounty.json();
+    countyData = topojson.feature(countyDt, countyDt.objects.counties).features;
+
+    const resEd = await fetch(edURL);
+    const edDt = await resEd.json();
+    edData = edDt;
+  } catch (error) {
+    console.log(error);
+  }
+  drawMap();
 }
 
-drawCanvas();
 getData();
