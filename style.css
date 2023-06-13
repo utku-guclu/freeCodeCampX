@@ -13,20 +13,3 @@ body {
   height: 100vh;
 }
 
-svg {
-  background-color: #212964a6;
-}
-
-#green {
-  color: green;
-}
-
-#orange {
-  color: orangered;
-}
-
-#tooltip {
-  visibility: hidden;
-  width: auto;
-  height: auto;
-}

@@ -5,21 +5,28 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scatterplot Graph</title>
+  <title>Heat Map</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <svg id=""canvas>
-    <text id="title" x="292" y="30">Doping in Professional Bicycle Racing</text>
-  </svg>
+  <h1 id="title">Monthly Global Land-Surface Temperature</h1>
+  <h4 id="description">Temperatures from 1753 to 2015. Average is 8.66c</h4>
   <div id="tooltip"></div>
-  <div id="legend">
-    Year (x) vs Time (y) <br/>
-    <span id="orange">Orange</span> = Doping Allegation | 
-    <span id="green">Green</span> = No Doping Allegation
-  </div>
+  <svg id="canvas">
+
+  </svg>
+  <svg id="legend">
+    <g>
+      <rect x="10" y="0" width="0" height="40" fill="SteelBlue"></rect>
+      <rect x="60" y="20" fill="white">Variance of -1 or less</rect>
+    </g>
+    <g>
+      <rect x="10" y="0" width="0" height="40" fill="LightSteelBlue"></rect>
+      <rect x="60" y="60" fill="white">On or Below Average</rect>
+    </g>
+  </svg>
   <script defer src="/script.js"></script>
   <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </body>
