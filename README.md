@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Celestial Bodies Database
+Instructions
+For this project, you need to log in to PostgreSQL with psql to create your database. Do that by entering psql --username=freecodecamp --dbname=postgres in the terminal. Make all the tests below pass to complete the project. Be sure to get creative, and have fun!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Don't forget to connect to your database after you create it 😄
 
-## Available Scripts
+Here's some ideas for other column and table names: description, has_life, is_spherical, age_in_millions_of_years, planet_types, galaxy_types, distance_from_earth.
 
-In the project directory, you can run:
+Notes:
+If you leave your virtual machine, your database may not be saved. You can make a dump of it by entering pg_dump -cC --inserts -U freecodecamp universe > universe.sql in a bash terminal (not the psql one). It will save the commands to rebuild your database in universe.sql. The file will be located where the command was entered. If it's anything inside the project folder, the file will be saved in the VM. You can rebuild the database by entering psql -U postgres < universe.sql in a terminal where the .sql file is.
 
-### `npm start`
+If you are saving your progress on freeCodeCamp.org, after getting all the tests to pass, follow the instructions above to save a dump of your database. Save the universe.sql file in a public repository and submit the URL to it on freeCodeCamp.org.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Complete the tasks below
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You should create a database named universe
 
-### `npm test`
+Be sure to connect to your database with \c universe. Then, you should add tables named galaxy, star, planet, and moon
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Each table should have a primary key
 
-### `npm run build`
+Each primary key should automatically increment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Each table should have a name column
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You should use the INT data type for at least two columns that are not a primary or foreign key
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You should use the NUMERIC data type at least once
 
-### `npm run eject`
+You should use the TEXT data type at least once
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+You should use the BOOLEAN data type on at least two columns
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Each "star" should have a foreign key that references one of the rows in galaxy
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Each "planet" should have a foreign key that references one of the rows in star
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Each "moon" should have a foreign key that references one of the rows in planet
 
-## Learn More
+Your database should have at least five tables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Each table should have at least three rows
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The galaxy and star tables should each have at least six rows
 
-### Code Splitting
+The planet table should have at least 12 rows
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The moon table should have at least 20 rows
 
-### Analyzing the Bundle Size
+Each table should have at least three columns
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The galaxy, star, planet, and moon tables should each have at least five columns
 
-### Making a Progressive Web App
+At least two columns per table should not accept NULL values
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+At least one column from each table should be required to be UNIQUE
 
-### Advanced Configuration
+All columns named name should be of type VARCHAR
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Each primary key column should follow the naming convention table_name_id. For example, the moon table should have a primary key column named moon_id
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Each foreign key column should have the same name as the column it is referencing
