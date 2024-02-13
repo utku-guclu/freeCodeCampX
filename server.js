@@ -6,6 +6,7 @@ const http = require("http");
 const socket = require("socket.io");
 const helmet = require("helmet");
 const cors = require("cors");
+const nocache = require("nocache");
 
 const fccTestingRoutes = require("./routes/fcctesting.js");
 const runner = require("./test-runner.js");
@@ -25,11 +26,24 @@ app.use(helmet());
 // For FCC testing purposes and enables the user to connect from outside the hosting platform
 app.use(cors({ origin: "*" }));
 
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  next();
+});
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'");
+  next();
+});
+// Cybersecurity 
+app.use(helmet.noSniff()); 
+app.use(helmet.xssFilter()); 
+app.use(nocache()); 
+app.use(helmet.hidePoweredBy({ setTo: 'PHP 7.4.3' }));
 // Import Player class using dynamic import
 const PlayerPromise = import("./public/Player.mjs");
 
 // Index page (static HTML)
-app.route("/").get(function (req, res) {
+app.route("/").get(function(req, res) {
   res.sendFile(process.cwd() + "/views/index.html");
 });
 
@@ -37,9 +51,11 @@ app.route("/").get(function (req, res) {
 fccTestingRoutes(app);
 
 // 404 Not Found Middleware
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.status(404).type("text").send("Not Found");
 });
+
+
 
 // Player objects storage
 const players = {};
@@ -94,7 +110,7 @@ server.listen(portNum, () => {
   console.log(`Listening on port ${portNum}`);
   if (process.env.NODE_ENV === "test") {
     console.log("Running Tests...");
-    setTimeout(function () {
+    setTimeout(function() {
       try {
         runner.run();
       } catch (error) {
