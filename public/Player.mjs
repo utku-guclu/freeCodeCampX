@@ -1,9 +1,10 @@
 export class Player {
-  constructor({ x, y, score, id }) {
+  constructor({ x, y, score, id, color }) {
     this.x = x;
     this.y = y;
     this.score = score;
     this.id = id;
+    this.color = color;
   }
 
   movePlayer(dir, speed) {

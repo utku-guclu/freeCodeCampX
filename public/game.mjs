@@ -4,12 +4,23 @@ const socket = io();
 const canvas = document.getElementById("game-window");
 const context = canvas.getContext("2d");
 
+// Function to generate a random color
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 // Initialize player
 const player = new Player({
   x: canvas.width / 2,
   y: canvas.height / 2,
   score: 0,
   id: socket.id, // Assuming socket.id represents a unique identifier for the player
+  color: getRandomColor(),
 });
 
 // Initialize an empty object to store player objects
@@ -46,7 +57,7 @@ function addRandomCollectible() {
   const x = Math.floor(Math.random() * canvas.width);
   const y = Math.floor(Math.random() * canvas.height);
   const value = Math.floor(Math.random() * 10) + 1; // Random value between 1 and 10
-  const collectibleColor = "pink"
+  const collectibleColor = "pink";
   const collectible = new Collectible({ x, y, value, collectibleColor });
   collectibles.push(collectible);
 }
@@ -56,24 +67,14 @@ setInterval(addRandomCollectible, 1000);
 
 // Function to draw collectibles with random colors
 function drawCollectibles() {
-  collectibles.forEach(collectible => {
-    context.fillStyle = collectible.color; // Use the collectible's color
+  collectibles.forEach((collectible) => {
+    const color = getRandomColor();
+    context.fillStyle = color; // Use the collectible's color
     context.beginPath();
     context.arc(collectible.x, collectible.y, 5, 0, Math.PI * 2);
     context.fill();
   });
 }
-
-// Function to generate a random color
-function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 
 // Event listener for keydown event
 document.addEventListener("keydown", (event) => {
@@ -94,19 +95,52 @@ function drawPlayers() {
 
   // Draw each player
   Object.values(players).forEach((player) => {
-    context.fillStyle = getRandomColor(); // Example color, replace with your own
+    const color = getRandomColor();
+    context.fillStyle = color;
     context.beginPath();
     context.arc(player.x, player.y, 10, 0, Math.PI * 2);
     context.fill();
   });
 }
 
-// Function to detect collision between two objects
-function collisionDetection(obj1, obj2) {
-  return Math.sqrt((obj1.x - obj2.x) ** 2 + (obj1.y - obj2.y) ** 2) < 15; // Adjust collision radius as needed
+// Function to draw the scoreboard
+function drawScoreboard(scores) {
+  // Get the scoreboard element
+  const scoreboardElement = document.getElementById("scoreboard");
+  // Clear the existing scoreboard
+  scoreboardElement.innerHTML = "";
+
+  // Sort scores by rank
+  scores.sort((a, b) => a.rank - b.rank);
+
+  // Create HTML elements for each player's score and rank
+  scores.forEach((player) => {
+    const playerElement = document.createElement("div");
+    playerElement.textContent = `Player ${player.id}: Score - ${player.score}, ${player.rank}`;
+    scoreboardElement.appendChild(playerElement);
+  });
+}
+
+// Function to detect collision between player and collectibles
+function collisionDetection(player, collectibles) {
+  for (let i = 0; i < collectibles.length; i++) {
+    const collectible = collectibles[i];
+
+    if (player.collision(collectible)) {
+      return { collided: true, index: i }; // Return collision and collectible index
+    }
+  }
+  return { collided: false, index: -1 }; // No collision detected
 }
 
 // Event listener for playerMoved event from server
+
+// Event listener for receiving updated scores from the server
+socket.on("scores", (scores) => {
+  // Draw the updated scoreboard
+  drawScoreboard(scores);
+});
+
 socket.on("playerMoved", ({ id, x, y }) => {
   // Check if the player already exists
   if (!players[id]) {
@@ -119,14 +153,13 @@ socket.on("playerMoved", ({ id, x, y }) => {
   }
 
   // Check for collisions with collectibles
-  collectibles.forEach((collectible, index) => {
-    if (collisionDetection(player, collectible)) {
-      // Handle collision logic (e.g., increase player's score)
-      player.score += collectible.value;
-      // Remove the collected collectible from the array
-      collectibles.splice(index, 1);
-    }
-  });
+  const collisionResult = collisionDetection(players[id], collectibles);
+  if (collisionResult.collided) {
+    // Handle collision logic (e.g., increase player's score)
+    player.score += collectibles[collisionResult.index].value;
+    // Remove the collected collectible from the array
+    collectibles.splice(collisionResult.index, 1);
+  }
 
   // Draw all players and collectibles on the canvas
   drawPlayers();

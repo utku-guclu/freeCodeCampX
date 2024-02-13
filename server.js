@@ -28,20 +28,6 @@ app.use(cors({ origin: "*" }));
 // Import Player class using dynamic import
 const PlayerPromise = import("./public/Player.mjs");
 
-// Import Collectible class using dynamic import
-const Collectible = import("./public/Collectible.mjs");
-
-// Function to add collectibles to the array
-function addCollectible() {
-  // Generate random coordinates and value for the collectible
-  const x = Math.floor(Math.random() * 600) + 20;
-  const y = Math.floor(Math.random() * 440) + 20;
-  const value = Math.floor(Math.random() * 10) + 1; // Adjust value range as needed
-  // Create a new collectible object and add it to the array
-  const collectible = new Collectible({ x, y, value });
-  collectibles.push(collectible);
-}
-
 // Index page (static HTML)
 app.route("/").get(function (req, res) {
   res.sendFile(process.cwd() + "/views/index.html");
