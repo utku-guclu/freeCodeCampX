@@ -42,7 +42,9 @@ class Program
     }
 }
 
-/* Insertion Sort */
+/* Insertion Sort */  
+// worst case n(n-1)/2 => (n^2 - n)/2
+// best case O(n-1)
 int[] array = new int[3] {3,2,1};
 int i;
 for (int current = 1; current < array.Length; current++)
