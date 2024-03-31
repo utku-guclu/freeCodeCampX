@@ -1,4 +1,4 @@
-﻿string[,] corporate = 
+string[,] corporate = 
 	{
 		{"Robert", "Bavin"}, {"Simon", "Bright"},
 		{"Kim", "Sinclair"}, {"Aashrita", "Kamath"},
