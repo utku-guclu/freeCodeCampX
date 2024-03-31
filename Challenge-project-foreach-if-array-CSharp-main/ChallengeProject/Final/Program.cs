@@ -7,14 +7,14 @@ class Program
         int[] array = new int[] { 1, 2, 3 };
 
         // Call the Selection Sort function
-        // worst case n(n-1)/2 => (n^2 - n)/2
-        // best case n(n-1)/2 => (n^2 - n)/2
-        //SelectionSort(array);
+        // worst case n(n-1)/2 => (n^2 - n)/2 => n^2
+        // best case n(n-1)/2 => (n^2 - n)/2 => n^2
+        SelectionSort(array);
 
         // Call the Insertion Sort function
-        // worst case n(n-1)/2 => (n^2 - n)/2
-        // best case O(n-1)
-        InsertionSort(array);
+        // worst case n(n-1)/2 => (n^2 - n)/2 => n^2
+        // best case O(n-1) => O(n)
+        // InsertionSort(array);
 
         // Print sorted array
         foreach (int element in array)
@@ -47,7 +47,7 @@ class Program
     public static void InsertionSort(int[] array)
     {
         int i;
-        for (int current = 1; current < array.Length - 1; current++)
+        for (int current = 1; current < array.Length; current++)
         {
             i = current;
             Console.WriteLine("compare");
