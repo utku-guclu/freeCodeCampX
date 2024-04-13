@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/utku/c#/CsharpProjects/TestProject/TestProject.csproj": {}
+    "/home/utku/c#/CsharpProjects/TestProject/Debug101/Debug101.csproj": {}
   },
   "projects": {
-    "/home/utku/c#/CsharpProjects/TestProject/TestProject.csproj": {
+    "/home/utku/c#/CsharpProjects/TestProject/Debug101/Debug101.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/utku/c#/CsharpProjects/TestProject/TestProject.csproj",
-        "projectName": "TestProject",
-        "projectPath": "/home/utku/c#/CsharpProjects/TestProject/TestProject.csproj",
+        "projectUniqueName": "/home/utku/c#/CsharpProjects/TestProject/Debug101/Debug101.csproj",
+        "projectName": "Debug101",
+        "projectPath": "/home/utku/c#/CsharpProjects/TestProject/Debug101/Debug101.csproj",
         "packagesPath": "/home/utku/.nuget/packages/",
-        "outputPath": "/home/utku/c#/CsharpProjects/TestProject/obj/",
+        "outputPath": "/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/utku/.nuget/NuGet/NuGet.Config"

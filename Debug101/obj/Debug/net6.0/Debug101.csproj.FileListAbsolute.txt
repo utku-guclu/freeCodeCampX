@@ -1,0 +1,15 @@
+/home/utku/c#/CsharpProjects/TestProject/Debug101/bin/Debug/net6.0/Debug101
+/home/utku/c#/CsharpProjects/TestProject/Debug101/bin/Debug/net6.0/Debug101.deps.json
+/home/utku/c#/CsharpProjects/TestProject/Debug101/bin/Debug/net6.0/Debug101.runtimeconfig.json
+/home/utku/c#/CsharpProjects/TestProject/Debug101/bin/Debug/net6.0/Debug101.dll
+/home/utku/c#/CsharpProjects/TestProject/Debug101/bin/Debug/net6.0/Debug101.pdb
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.GeneratedMSBuildEditorConfig.editorconfig
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.AssemblyInfoInputs.cache
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.AssemblyInfo.cs
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.csproj.CoreCompileInputs.cache
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.sourcelink.json
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.dll
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/refint/Debug101.dll
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.pdb
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/Debug101.genruntimeconfig.cache
+/home/utku/c#/CsharpProjects/TestProject/Debug101/obj/Debug/net6.0/ref/Debug101.dll

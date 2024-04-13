@@ -12,3 +12,4 @@
 /home/utku/c#/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.pdb
 /home/utku/c#/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.genruntimeconfig.cache
 /home/utku/c#/CsharpProjects/TestProject/obj/Debug/net8.0/ref/TestProject.dll
+/home/utku/c#/CsharpProjects/TestProject/obj/Debug/net8.0/TestProject.sourcelink.json
