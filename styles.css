@@ -1,27 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+html,
 body {
-  background-color: lightgray;
-  text-align: center;
+  margin: 0;
 }
 
-h1,
-h3,
-p {
-  text-align: center;
-}
-
-path {
-  stroke: red;
-  stroke-width: 0.5px;
-  fill: orange;
-}
-
-#tooltip {
-  text-align: left;
-  padding: 1em;
-  background-color: lightcoral;
-  border: 1px solid black;
-  width: auto;
-  opacity: 0;
-  color: black;
+.tooltip {
+  font-family: "Lato", "Arial", sans-serif;
   position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  font: 1em;
+  background: hsla(0, 0%, 100%, 0.8);
+  pointer-events: none;
+  box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.2);
+  line-height: 1.5em;
+}
+
+.def {
+  font-weight: 700;
 }
